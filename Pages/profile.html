@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+ <!-- Burger Menu -->
+ <div class="burger-menu">
+  <input type="checkbox" id="burger-toggle">
+  <label for="burger-toggle">☰</label>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul>
+    <li><a href="student-list.html">Student List</a></li>
+    <li><a href="messages.html">Messages</a></li>
+    <li><a href="counseling-chats.html">Counseling Chats</a></li>
+  </ul>
+</div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-title">Mood Click</div>
+      <div class="profile-options">
+        <div class="admin-profile" onclick="location.href='profile.html'">
+          <img src="https://via.placeholder.com/36" alt="Admin Profile Picture">
+          <span>Admin Name</span>
+        </div>
+        <a href="logout.html" onclick="confirmLogout()">Logout</a>
+      </div>
+    </div>
+
+    <!-- Profile Information Section -->
+    <div class="profile-section">
+      <h3>Admin Profile</h3>
+
+      <!-- Profile Information -->
+      <div class="profile-info">
+        <div class="form-group">
+          <label for="admin-name">Name:</label>
+          <input type="text" id="admin-name" value="John Doe" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="admin-email">Email:</label>
+          <input type="email" id="admin-email" value="admin@example.com" disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="admin-department">Department:</label>
+          <input type="text" id="admin-department" value="ITE" disabled>
+        </div>
+      </div>
+
+      <!-- Edit Profile Button -->
+      <div class="form-group">
+        <button onclick="enableEdit()">Edit Profile</button>
+      </div>
+
+      <!-- Save and Cancel Buttons (hidden by default) -->
+      <div class="edit-buttons" style="display: none;">
+        <button onclick="saveProfile()">Save Changes</button>
+        <button onclick="window.location.reload()">Cancel</button>
+      </div>
+    </div>
+  </div>
+   <script src="/javascript/scripts.js"></script>
+</body>
+</html>

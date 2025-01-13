@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<!-- Burger Menu (Visible on smaller screens) -->
+<div class="burger-menu" id="burger-menu">
+  <input type="checkbox" id="burger-toggle">
+  <label for="burger-toggle">
+    <i class="fas fa-bars"></i> <!-- Burger icon -->
+  </label>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <ul>
+    <li><a href="student-list.html">Student List</a></li>
+    <li><a href="messages.html">Messages</a></li>
+    <li><a href="counseling-chats.html">Counseling Chats</a></li>
+  </ul>
+</div>
+
+<!-- Main content area -->
+<div class="main-content">
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-title">MoodClick Admin Dashboard</div>
+      <div class="profile-options">
+        <div class="admin-profile" onclick="location.href='profile.html'">
+          <img src="https://via.placeholder.com/36" alt="Admin Profile Picture">
+          <span>Admin Name</span>
+        </div>
+        <a href="logout.html" onclick="confirmLogout()">Logout</a>
+      </div>
+    </div>
+    <!-- Student List Section -->
+    <div class="student-list-section">
+      <h3>Student List</h3>
+      <!-- Mood Filter Dropdown -->
+      <div class="form-group">
+        <label for="mood-filter">Filter by Mood</label>
+        <select id="mood-filter" class="form-control" onchange="filterStudents()">
+          <option value="all">All</option>
+          <option value="happy">Happy</option>
+          <option value="sad">Sad</option>
+          <option value="angry">Angry</option>
+          <option value="disappointed">Disappointed</option>
+        </select>
+      </div>
+
+      <!-- Student List Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mood</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="student-list">
+          <tr class="student-row" data-mood="happy" onclick="showStudentInfo('student one')">
+            <td>student one</td>
+            <td><span class="mood-label green">Happy</span></td>
+            <td id="status-student one">Safe</td>
+            <td><button>Message</button></td>
+          </tr>
+          <tr class="student-row" data-mood="sad" onclick="showStudentInfo('student two')">
+            <td>student two</td>
+            <td><span class="mood-label yellow">Sad</span></td>
+            <td id="status-student two">Under Observation</td>
+            <td><button>Message</button></td>
+          </tr>
+          <tr class="student-row" data-mood="angry" onclick="showStudentInfo('student three')">
+            <td>student three</td>
+            <td><span class="mood-label red">Angry</span></td>
+            <td id="status-student three">Not safe</td>
+            <td><button>Message</button></td>
+          </tr>
+          <tr class="student-row" data-mood="disappointed" onclick="showStudentInfo('student four')">
+            <td>student four</td>
+            <td><span class="mood-label yellow">Disappointed</span></td>
+            <td id="status-student four">Under Observation</td>
+            <td><button>Message</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- Modal Popup -->
+<div id="studentModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 id="modal-student-name"></h2>
+    <p><strong>Department:</strong> <span id="modal-student-department"></span></p>
+    
+    <!-- Mood Attempts -->
+    <p><strong>Mood Attempts:</strong></p>
+    <ul id="modal-mood-attempts"></ul>
+    <p><strong>Status:</strong> <span id="modal-student-status"></span></p>
+  </div>
+</div>
+
+<script src="/javascript/scripts.js"></script>
+</body>
+</html>

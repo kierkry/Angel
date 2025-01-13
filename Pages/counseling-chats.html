@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>MoodClick Admin Dashboard</title>
+</head>
+<body>
+
+<!-- Burger Menu -->
+<div class="burger-menu">
+  <input type="checkbox" id="burger-toggle">
+  <label for="burger-toggle"></label>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul>
+    <li><a href="student-list.html">Student List</a></li>
+    <li><a href="messages.html">Messages</a></li>
+    <li><a href="counseling-chats.html">Counseling Chats</a></li>
+  </ul>
+</div>
+
+<!-- Main content area -->
+<div class="main-content">
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-title">MoodClick Admin Dashboard</div>
+      <div class="profile-options">
+        <div class="admin-profile" onclick="location.href='profile.html'">
+          <img src="https://via.placeholder.com/36" alt="Admin Profile Picture">
+          <span>Admin Name</span>
+        </div>
+        <a href="logout.html" onclick="confirmLogout()">Logout</a>
+      </div>
+    </div>
+
+    <!-- Inbox area -->
+    <div class="inbox">
+        <div class="inbox-item" id="student1" onclick="openChat('student1')">
+          <div class="name">John Doe</div>
+          <div class="date-time">Last conversation: 2024-09-12 14:00</div>
+        </div>
+        <div class="inbox-item" id="student2" onclick="openChat('student2')">
+          <div class="name">Jane Smith</div>
+          <div class="date-time">Last conversation: 2024-09-12 10:30</div>
+        </div>
+    </div>
+
+    <!-- Chat box inside the inbox -->
+    <div class="chat-container" id="chat-container">
+      <div class="chat-header">
+        <div id="chat-header-text">Message Student</div>
+        <button class="close-chat" onclick="closeChat()">Close</button>
+      </div>
+      <div id="chat-box" class="chat-body"></div>
+      <div class="chat-footer">
+        <textarea id="message-input" placeholder="Type your message..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+  const chatHistory = {
+    student1: [
+      { sender: 'student', message: 'I’m feeling stressed about school.' },
+      { sender: 'admin', message: 'I understand. Do you want to talk about it?' },
+    ],
+    student2: [
+      { sender: 'student', message: 'I need help balancing my assignments.' },
+      { sender: 'admin', message: 'Let’s discuss some strategies that could help.' },
+    ]
+  };
+
+  function openChat(studentId) {
+    const chatBox = document.getElementById('chat-box');
+    const chatHeaderText = document.getElementById('chat-header-text');
+    chatBox.innerHTML = '';
+
+    const messages = chatHistory[studentId];
+    const studentName = document.querySelector(`#${studentId} .name`).textContent;
+    chatHeaderText.textContent = `Counseling with ${studentName}`;
+
+    messages.forEach(msg => {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('chat-message', msg.sender === 'student' ? 'student' : 'admin');
+      messageDiv.textContent = msg.message;
+      chatBox.appendChild(messageDiv);
+    });
+
+    document.getElementById('chat-container').style.display = 'flex';
+  }
+
+  function closeChat() {
+    document.getElementById('chat-container').style.display = 'none';
+  }
+
+  function sendMessage() {
+    const messageInput = document.getElementById('message-input');
+    const message = messageInput.value.trim();
+    const chatBox = document.getElementById('chat-box');
+
+    if (message !== '') {
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('chat-message', 'admin');
+      newMessage.textContent = message;
+      chatBox.appendChild(newMessage);
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+      messageInput.value = '';
+    }
+  }
+
+  function confirmLogout() {
+    if (confirm('Are you sure you want to log out?')) {
+      window.location.href = 'logout.html';
+    }
+  }
+</script>
+</body>
+</html>
